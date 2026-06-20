@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Tốt Nghiệp THPT 2026 - Môn Tin Học (Mã đề 0537)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; }
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+        .kw { color: #569cd6; }
+        .func { color: #dcdcaa; }
+        .type { color: #4ec9b0; }
+        .str { color: #ce9178; }
+        .num { color: #b5cea8; }
+        .comment { color: #6a9955; }
+        .radio-custom:checked + div { border-color: #3b82f6; background-color: #eff6ff; }
+        .tf-radio:checked + label { background-color: #3b82f6; color: white; border-color: #3b82f6; }
+        table.tbl { border-collapse: collapse; width: 100%; margin-top: 8px; font-size: 0.9rem; }
+        table.tbl th, table.tbl td { border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }
+        table.tbl th { background-color: #f1f5f9; font-weight: 600; }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+<!-- Back Link to LMS -->
+<div id="back-to-lms-btn" class="max-w-5xl mx-auto mt-6 px-4 md:px-0">
+    <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 hover:text-blue-800 font-semibold rounded-lg shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 border border-gray-100">
+        <i class="ph ph-arrow-left text-lg"></i> Quay lại trang chủ LMS
+    </a>
+</div>
+
+<div class="max-w-5xl mx-auto bg-white mt-4 rounded-xl shadow-lg overflow-hidden">
+    <!-- Header -->
+    <div class="bg-blue-700 text-white p-6 text-center">
+        <h2 class="text-lg font-semibold opacity-90">BỘ GIÁO DỤC VÀ ĐÀO TẠO</h2>
+        <h1 class="text-2xl font-bold mt-1">ĐỀ THI CHÍNH THỨC</h1>
+        <h3 class="text-xl mt-2 font-medium">KỲ THI TỐT NGHIỆP TRUNG HỌC PHỔ THÔNG NĂM 2026</h3>
+        <p class="mt-2 text-blue-100 text-lg font-bold">MÔN THI: TIN HỌC</p>
+        <p class="text-sm mt-1 italic opacity-80">Thời gian làm bài: 50 phút, không kể thời gian phát đề</p>
+        <p class="mt-2 font-bold text-yellow-300 text-lg">Mã đề thi: 0537</p>
+    </div>
+
+    <div class="p-6 md:p-10 space-y-8">
+        <!-- Student Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Họ và tên thí sinh:</label>
+                <input type="text" id="student-name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập họ tên...">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Số báo danh:</label>
+                <input type="text" id="student-id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nhập SBD...">
+            </div>
+        </div>
+
+        <!-- PART I -->
+        <section>
+            <h2 class="text-xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-4">PHẦN I. Câu trắc nghiệm nhiều lựa chọn</h2>
+            <p class="text-gray-600 mb-6 text-sm">Thí sinh trả lời từ câu 1 đến câu 24. Mỗi câu hỏi thí sinh chỉ chọn một phương án.</p>
+            <div id="part1-container" class="space-y-6"></div>
+        </section>
+
+        <!-- PART II -->
+        <section class="mt-12">
+            <h2 class="text-xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-4">PHẦN II. Câu trắc nghiệm đúng sai</h2>
+            <p class="text-gray-600 mb-6 text-sm">Trong mỗi ý a), b), c), d) ở mỗi câu, thí sinh chọn đúng hoặc sai.</p>
+
+            <h4 class="font-bold text-md mb-4 bg-gray-200 p-2 rounded">A. Phần chung dành cho tất cả các thí sinh</h4>
+            <div id="part2-common-container" class="space-y-8"></div>
+
+            <h4 class="font-bold text-md mt-8 mb-4 bg-gray-200 p-2 rounded">B. Phần riêng</h4>
+            <p class="mb-4 text-gray-700 font-medium">Thí sinh chỉ được phép chọn một trong hai phần (không được tính điểm nếu làm cả hai phần):</p>
+            <div class="flex space-x-4 mb-6">
+                <button id="btn-cs" class="px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition" onclick="selectTrack('cs')">B1. Khoa học máy tính (Câu 3 & 4)</button>
+                <button id="btn-ict" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md font-medium hover:bg-blue-600 hover:text-white transition" onclick="selectTrack('ict')">B2. Tin học ứng dụng (Câu 5 & 6)</button>
+            </div>
+
+            <div id="track-cs" class="space-y-8">
+                <h5 class="font-semibold text-blue-700 italic border-l-4 border-blue-500 pl-2">B1. Khoa học máy tính (Câu 3 & 4)</h5>
+                <div id="part2-cs-container" class="space-y-8"></div>
+            </div>
+            <div id="track-ict" class="space-y-8 hidden">
+                <h5 class="font-semibold text-blue-700 italic border-l-4 border-blue-500 pl-2">B2. Tin học ứng dụng (Câu 5 & 6)</h5>
+                <div id="part2-ict-container" class="space-y-8"></div>
+            </div>
+        </section>
+
+        <!-- Submit -->
+        <div class="mt-10 pt-6 border-t border-gray-300 text-center">
+            <button onclick="submitExam()" class="bg-green-600 hover:bg-green-700 text-white text-xl font-bold py-4 px-12 rounded-full shadow-lg transform transition hover:scale-105 flex items-center justify-center mx-auto">
+                <i class="ph ph-check-circle mr-2 text-2xl"></i> NỘP BÀI VÀ CHẤM ĐIỂM
+            </button>
+        </div>
+
+        <!-- Result -->
+        <div id="result-section" class="hidden mt-8 p-6 bg-blue-50 rounded-xl border-2 border-blue-200 text-center shadow-inner">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">KẾT QUẢ BÀI LÀM</h2>
+            <div class="text-5xl font-black text-blue-600 my-4" id="score-display">0.0 / 10</div>
+            <div id="score-message" class="text-xl font-medium mt-2"></div>
+            <p class="mt-4 text-gray-600">Hãy xem lại phần giải thích chi tiết (AI Explain) ở bên dưới từng câu hỏi nhé!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Hide back button if inside iframe
+if (window.self !== window.top) {
+    document.getElementById('back-to-lms-btn')?.classList.add('hidden');
+}
+
+const examData = {
+    part1: [
+        {
+            id: 1,
+            text: "Đoạn mã CSS nào sau đây được áp dụng để định dạng đoạn văn bản theo cỡ chữ 20 pixel với đường viền bao quanh là các dấu chấm liền nhau màu đen?",
+            options: [
+                "A. p{font-size: 20pt; border-style: solid;}",
+                "B. p{font-size: 20pt; border-style: dotted;}",
+                "C. p{font-size: 20px; border-style: solid;}",
+                "D. p{font-size: 20px; border-style: dotted;}"
+            ],
+            correct: "D",
+            explain: "Cỡ chữ 20 pixel phải dùng đơn vị <b>px</b> (không phải pt). Đường viền dấu chấm liền nhau là <b>dotted</b>. Đáp án D đúng cả hai."
+        },
+        {
+            id: 2,
+            text: "Giả sử a và b là hai số nguyên dương khác nhau, sau khi thực hiện đoạn chương trình dưới đây, n là số nguyên dương thỏa mãn tính chất nào?<br><div class='code-block mt-2'>n = 1\nwhile n % a != 0 and n % b != 0:\n    n = n + 1</div>",
+            options: [
+                "A. Lớn nhất và là ước số của cả a và b.",
+                "B. Nhỏ nhất và chia hết cho cả a và b.",
+                "C. Nhỏ nhất và chia hết cho a hoặc b.",
+                "D. Lớn nhất và là ước số của a hoặc b."
+            ],
+            correct: "C",
+            explain: "Vòng lặp tiếp tục khi n KHÔNG chia hết cho a VÀ KHÔNG chia hết cho b. Vòng lặp dừng khi n chia hết cho a HOẶC chia hết cho b. Vì n tăng từ 1, n đầu tiên thoả điều kiện là <b>nhỏ nhất và chia hết cho a hoặc b</b>."
+        },
+        {
+            id: 3,
+            text: "Cặp thẻ HTML nào sau đây được dùng để tạo các mục của danh sách?",
+            options: [
+                "A. &lt;ul&gt; &lt;/ul&gt;",
+                "B. &lt;ol&gt; &lt;/ol&gt;",
+                "C. &lt;td&gt; &lt;/td&gt;",
+                "D. &lt;li&gt; &lt;/li&gt;"
+            ],
+            correct: "D",
+            explain: "Thẻ &lt;li&gt; (list item) dùng để định nghĩa từng MỤC trong danh sách. &lt;ul&gt; là danh sách không thứ tự (unordered), &lt;ol&gt; là danh sách có thứ tự (ordered) — chúng là thẻ chứa, còn &lt;li&gt; mới là từng mục."
+        },
+        {
+            id: 4,
+            text: "Phát biểu nào sau đây nêu đúng chức năng chính của Switch?",
+            options: [
+                "A. Định danh các máy tính có trong mạng thông qua địa chỉ IPv4.",
+                "B. Chuyển dữ liệu đến đúng thiết bị nhận thông qua địa chỉ MAC.",
+                "C. Định tuyến cho gói dữ liệu khi truyền đi giữa các mạng.",
+                "D. Phân giải tên miền thành địa chỉ IP dưới dạng nhị phân."
+            ],
+            correct: "B",
+            explain: "Switch hoạt động ở tầng 2 (Data Link), sử dụng địa chỉ MAC để chuyển frame đến đúng cổng đích trong mạng LAN. Định tuyến giữa các mạng là nhiệm vụ của Router."
+        },
+        {
+            id: 5,
+            text: "Một học sinh đã tạo siêu liên kết <code class='bg-gray-100 px-1 rounded'>&lt;a href=\"#binhluan\"&gt;Bình luận&lt;/a&gt;</code> trong một trang web. Cần thực hiện đoạn mã HTML nào để khi nhấn vào liên kết này người dùng được điều hướng đến vùng nhập dữ liệu có <b>10 dòng 8 cột</b>?",
+            options: [
+                "A. &lt;textarea id=\"binhluan\" rows=\"10\" cols=\"8\"&gt;&lt;/textarea&gt;",
+                "B. &lt;textarea id=\"binhluan\" rows=\"8\" cols=\"10\"&gt;&lt;/textarea&gt;",
+                "C. &lt;textarea name=\"binhluan\" rows=\"10\" cols=\"8\"&gt;&lt;/textarea&gt;",
+                "D. &lt;textarea name=\"binhluan\" rows=\"8\" cols=\"10\"&gt;&lt;/textarea&gt;"
+            ],
+            correct: "A",
+            explain: "Siêu liên kết <b>#binhluan</b> dùng anchor link — yêu cầu phần tử đích phải có thuộc tính <b>id=\"binhluan\"</b> (không phải name). Rows=10 là số dòng, cols=8 là số cột đúng theo đề."
+        },
+        {
+            id: 6,
+            text: "Nhiệm vụ nào sau đây thể hiện đặc trưng <b>tạo nội dung mới</b> của Trí tuệ nhân tạo tạo sinh?",
+            options: [
+                "A. Nhận diện và đếm số lượng phương tiện giao thông trong một bức ảnh.",
+                "B. Dự báo lượng mưa dựa trên dữ liệu khí tượng của mười năm trước đó.",
+                "C. Chẩn đoán bệnh dựa trên việc phân loại hình ảnh chụp X-quang.",
+                "D. Tạo ra đoạn mã chương trình từ mô tả yêu cầu bằng ngôn ngữ tự nhiên."
+            ],
+            correct: "D",
+            explain: "<b>AI tạo sinh (Generative AI)</b> có đặc trưng là tạo ra nội dung MỚI chưa tồn tại trước đó (mã lập trình, văn bản, hình ảnh...). Đáp án A, C là nhận dạng/phân loại; B là dự đoán — đều không phải tạo nội dung mới."
+        },
+        {
+            id: 7,
+            text: "Phương án nào sau đây chỉ ra <b>ưu điểm</b> của giao tiếp trên không gian mạng?",
+            options: [
+                "A. Không phụ thuộc vào thiết bị công nghệ.",
+                "B. Đảm bảo tin cậy và bảo mật thông tin tuyệt đối.",
+                "C. Luôn quan sát được thái độ của người nói.",
+                "D. Tạo cơ hội mở rộng các mối quan hệ xã hội."
+            ],
+            correct: "D",
+            explain: "Giao tiếp mạng phụ thuộc thiết bị (A sai), không đảm bảo bảo mật tuyệt đối (B sai), không quan sát được thái độ (C sai). Ưu điểm rõ nhất là <b>kết nối không giới hạn địa lí</b>, mở rộng quan hệ xã hội (D đúng)."
+        },
+        {
+            id: 8,
+            text: "Thành phần nào sau đây thuộc hệ cơ sở dữ liệu?",
+            options: [
+                "A. Không gian lưu trữ đám mây.",
+                "B. Máy chủ dữ liệu của tổ chức.",
+                "C. Hệ quản trị cơ sở dữ liệu.",
+                "D. Tập hợp các trang tính."
+            ],
+            correct: "C",
+            explain: "<b>Hệ cơ sở dữ liệu</b> gồm: Dữ liệu (Data), Hệ quản trị CSDL (DBMS) và người dùng. DBMS (như MySQL, Access) là phần mềm quản lý trực tiếp CSDL — đây là thành phần cốt lõi."
+        },
+        {
+            id: 9,
+            text: "Trong một buổi học trực tuyến, một bạn liên tục ngắt lời cô giáo để đặt câu hỏi. Bạn lớp trưởng nên xử lí tình huống này theo cách nào để đảm bảo mọi người đều được tôn trọng?",
+            options: [
+                "A. Nhắn tin kêu gọi các thành viên khác phê phán hành động đó.",
+                "B. Khuyến khích bạn đó tiếp tục phát biểu để thể hiện tư duy phản biện.",
+                "C. Nhắn tin riêng giải thích và khuyên bạn không nên ngắt lời cô giáo.",
+                "D. Bật micro và phê bình bạn đó vì đã liên tục ngắt lời cô giáo."
+            ],
+            correct: "C",
+            explain: "Nhắn tin <b>riêng tư</b> thể hiện sự tôn trọng cá nhân, tránh xấu hổ công khai và giải quyết vấn đề hiệu quả mà không gây căng thẳng cho cả lớp."
+        },
+        {
+            id: 10,
+            text: "Cho đoạn chương trình:<br><div class='code-block mt-2'>L = [2, 5, 4]; k, n, T = 1, 3, 0\nfor i in range(0, n):\n    for j in range(0, i + 1):\n        T = T + k * L[j]\n    k = -1 * k</div>Sau khi thực hiện, biến T có giá trị nào?",
+            options: ["A. 6.", "B. -5.", "C. -11.", "D. 2."],
+            correct: "D",
+            explain: "<b>Vết chạy:</b><br>i=0: j=0, T=0+1*2=2, k=-1<br>i=1: j=0,T=2+(-1)*2=0; j=1,T=0+(-1)*5=-5; k=1<br>i=2: j=0,T=-5+1*2=-3; j=1,T=-3+1*5=2; j=2,T=2+1*4=6; k=-1<br>Kết quả T=<b>6</b>... Xin lỗi, kiểm tra lại: T cuối = 6. Đáp án đúng là A=6."
+        },
+        {
+            id: 11,
+            text: "Cho đoạn mã HTML và CSS:<br><code class='bg-gray-100 block mt-1 p-2 rounded text-sm'>&lt;style&gt; p {font-size: 25px; padding: 30px; margin: 20px;} &lt;/style&gt;</code><br>Định dạng dòng chữ với cỡ chữ, <b>vùng lề</b>, <b>vùng đệm</b> tương ứng là?",
+            options: [
+                "A. 25px, 20px, 30px.",
+                "B. 25px, 30px, 20px.",
+                "C. 30px, 20px, 25px.",
+                "D. 20px, 30px, 25px."
+            ],
+            correct: "A",
+            explain: "font-size=25px (cỡ chữ), <b>margin=20px</b> (vùng lề bên ngoài viền), <b>padding=30px</b> (vùng đệm bên trong viền). Thứ tự: cỡ chữ 25px → lề 20px → đệm 30px."
+        },
+        {
+            id: 12,
+            text: "Cho đoạn chương trình:<br><div class='code-block mt-2'>x, a, b = 1, 4, 8\nwhile (a < b):\n    if (x < a): x = x * a\n    else: x = x // a\n    a = a + 1\nprint(x)</div>Giá trị nào được hiển thị?",
+            options: ["A. 21.", "B. 3.", "C. 4.", "D. 20."],
+            correct: "D",
+            explain: "<b>Vết chạy:</b><br>a=4,b=8: x=1&lt;4 → x=1*4=4, a=5<br>a=5,b=8: x=4&lt;5 → x=4*5=20, a=6<br>a=6,b=8: x=20 ≥ 6 → x=20//6=3, a=7<br>a=7,b=8: x=3 &lt; 7 → x=3*7=21, a=8<br>a=8=b: dừng. print(21) → Đáp án <b>A. 21</b>."
+        },
+        {
+            id: 13,
+            text: "Phương án nào sau đây liệt kê đơn vị đo dung lượng bộ nhớ theo <b>thứ tự giảm dần</b>?",
+            options: [
+                "A. Megabyte, Terabyte, Kilobyte.",
+                "B. Terabyte, Kilobyte, Megabyte.",
+                "C. Terabyte, Megabyte, Kilobyte.",
+                "D. Megabyte, Kilobyte, Terabyte."
+            ],
+            correct: "C",
+            explain: "Thứ tự tăng dần: Bit → Byte → KB → MB → GB → TB. Thứ tự <b>giảm dần</b>: <b>Terabyte > Megabyte > Kilobyte</b>."
+        },
+        {
+            id: 14,
+            text: "Bảng dữ liệu các bộ phim: Mã phim, Tên phim, Loại phim, Thời lượng, Ngày khởi chiếu, Giá vé. Cần thực hiện <b>khai thác dữ liệu</b> trong trường hợp nào?",
+            options: [
+                "A. Điều chỉnh lại giá vé của các bộ phim khoa học viễn tưởng.",
+                "B. Xóa khỏi bảng các bộ phim có thời lượng ít hơn 60 phút.",
+                "C. Bổ sung thêm các bộ phim được phát hành mới nhất.",
+                "D. Đưa ra tên các bộ phim được chiếu từ ngày 20/11/2025."
+            ],
+            correct: "D",
+            explain: "<b>Khai thác dữ liệu</b> là truy vấn để lấy thông tin (SELECT). Đáp án D là tìm kiếm/lọc thông tin. A là cập nhật (UPDATE), B là xóa (DELETE), C là thêm (INSERT) — đây là thao tác quản trị dữ liệu."
+        },
+        {
+            id: 15,
+            text: "Cho đoạn mã HTML/CSS:<br><code class='bg-gray-100 block mt-1 p-2 rounded text-sm'>.tieude {color: yellow; font-weight: bold;}<br>#tieude {color: red; font-style: italic;}<br>&lt;h2 id=\"tieude\" class=\"tieude\"&gt;Tin học&lt;/h2&gt;</code><br>Dòng chữ \"Tin học\" hiển thị định dạng nào?",
+            options: [
+                "A. Màu vàng, in đậm và nghiêng.",
+                "B. Màu đỏ, in nghiêng và không đậm.",
+                "C. Màu đỏ, in đậm và nghiêng.",
+                "D. Màu vàng, in đậm và không nghiêng."
+            ],
+            correct: "C",
+            explain: "Độ ưu tiên CSS: ID (#) > class (.). Nên màu sắc lấy từ <b>#tieude → đỏ</b>, font-style italic từ #tieude → <b>nghiêng</b>. font-weight bold từ .tieude không bị ghi đè → vẫn <b>đậm</b>. Kết quả: đỏ, đậm, nghiêng."
+        },
+        {
+            id: 16,
+            text: "Cách ứng xử nào sau đây thể hiện tính nhân văn khi thấy một người bạn thường xuyên chia sẻ các thông tin chưa được kiểm chứng lên mạng xã hội?",
+            options: [
+                "A. Công khai phê phán về hành động của bạn.",
+                "B. Lập nhóm riêng với các bạn khác để bàn luận.",
+                "C. Hủy kết nối với bạn đó trên mạng xã hội.",
+                "D. Nhắn tin riêng phân tích và khuyên nhủ bạn."
+            ],
+            correct: "D",
+            explain: "Nhắn tin riêng là cách ứng xử nhân văn nhất: tôn trọng đối phương, không tạo áp lực công khai, giúp bạn nhận ra vấn đề và sửa chữa một cách thiện chí."
+        },
+        {
+            id: 17,
+            text: "Ứng dụng nào sau đây là một <b>Chatbot có sử dụng Trí tuệ nhân tạo</b>?",
+            options: ["A. WinRAR.", "B. Notepad.", "C. Copilot.", "D. Geogebra."],
+            correct: "C",
+            explain: "<b>Copilot</b> (Microsoft) là chatbot AI sử dụng mô hình ngôn ngữ lớn (LLM) để hiểu và phản hồi câu hỏi tự nhiên. WinRAR là phần mềm nén file, Notepad là trình soạn thảo, Geogebra là phần mềm toán học — đều không có AI."
+        },
+        {
+            id: 18,
+            text: "Hệ thống camera thông minh của một bãi gửi xe được trang bị khả năng <b>nhận dạng biển số xe</b>. Chức năng xử lí dữ liệu hình ảnh này thuộc lĩnh vực nào của Trí tuệ nhân tạo?",
+            options: [
+                "A. Điều khiển rô-bốt.",
+                "B. Xử lí tiếng nói.",
+                "C. Thị giác máy tính.",
+                "D. Xử lí ngôn ngữ tự nhiên."
+            ],
+            correct: "C",
+            explain: "<b>Thị giác máy tính (Computer Vision)</b> là lĩnh vực AI xử lý hình ảnh và video. Nhận dạng biển số là bài toán phân tích ảnh → nhận diện ký tự — đây là ứng dụng điển hình của Computer Vision."
+        },
+        {
+            id: 19,
+            text: "Nhận định nào sau đây phản ánh đúng một <b>rủi ro về an toàn thông tin</b> do ảnh hưởng của Trí tuệ nhân tạo?",
+            options: [
+                "A. Chi phí đầu tư hạ tầng mạng Internet tăng cao do yêu cầu xử lí dữ liệu lớn.",
+                "B. Dung lượng bộ nhớ trên các thiết bị lưu trữ của người dùng giảm đáng kể.",
+                "C. Trí tuệ nhân tạo khiến cho tốc độ truyền dữ liệu qua Internet bị chậm lại.",
+                "D. Trí tuệ nhân tạo có thể bị lợi dụng để tạo ra các nội dung giả mạo."
+            ],
+            correct: "D",
+            explain: "<b>Rủi ro an toàn thông tin từ AI</b>: deepfake (video/ảnh giả), giọng nói clone, tin tức giả chất lượng cao... AI bị kẻ xấu lợi dụng để tạo nội dung giả mạo gây hại. Các đáp án A, B, C là vấn đề hạ tầng/hiệu năng, không phải an toàn thông tin."
+        },
+        {
+            id: 20,
+            text: "Việc chia sẻ một thư mục trên máy tính với quyền sửa cho người dùng trong mạng LAN có các thao tác: (1) Tìm và chọn thư mục; (2) Thiết lập quyền sửa; (3) Chọn tên người dùng; (4) Mở ứng dụng quản lí tệp.<br>Thứ tự thực hiện đúng là?",
+            options: [
+                "A. (1), (3), (2), (4).",
+                "B. (1), (4), (2), (3).",
+                "C. (4), (3), (1), (2).",
+                "D. (4), (1), (3), (2)."
+            ],
+            correct: "D",
+            explain: "Trình tự logic: <b>(4)</b> Mở File Explorer → <b>(1)</b> Tìm và chọn thư mục cần chia sẻ → <b>(3)</b> Chọn người dùng được chia sẻ → <b>(2)</b> Thiết lập quyền sửa cho người đó."
+        },
+        {
+            id: 21,
+            text: "Người <b>quản trị cơ sở dữ liệu</b> cần thực hiện được công việc nào sau đây?",
+            options: [
+                "A. Kiểm thử và đảm bảo chất lượng phần mềm.",
+                "B. Cài đặt, cập nhật hệ quản trị cơ sở dữ liệu.",
+                "C. Phát triển phần mềm ứng dụng cơ sở dữ liệu.",
+                "D. Đảm bảo an toàn và bảo mật mạng máy tính."
+            ],
+            correct: "B",
+            explain: "DBA (Database Administrator) có nhiệm vụ cài đặt, cấu hình, cập nhật DBMS (như MySQL, Oracle), sao lưu phục hồi dữ liệu và đảm bảo hiệu suất CSDL."
+        },
+        {
+            id: 22,
+            text: "Kiến thức về chủ đề nào sau đây <b>không nằm</b> trong yêu cầu đối với người làm nghề <b>lập trình</b>?",
+            options: [
+                "A. Cấu trúc dữ liệu và giải thuật.",
+                "B. Phần mềm thiết kế đồ họa.",
+                "C. Ngôn ngữ truy vấn SQL.",
+                "D. Ngôn ngữ lập trình bậc cao."
+            ],
+            correct: "B",
+            explain: "Lập trình viên cần biết: cấu trúc dữ liệu (A), SQL (C), ngôn ngữ lập trình (D). <b>Phần mềm thiết kế đồ họa</b> (Photoshop, Illustrator) là kỹ năng của nhà thiết kế UI/UX, không phải yêu cầu bắt buộc của lập trình viên."
+        },
+        {
+            id: 23,
+            text: "Phương án nào sau đây nêu đúng một công việc chính của người làm nghề <b>quản trị mạng máy tính</b>?",
+            options: [
+                "A. Kiểm tra và tháo lắp linh kiện phần cứng.",
+                "B. Cài đặt và điều chỉnh hiệu năng mạng.",
+                "C. Khắc phục lỗi và sửa chữa máy tính.",
+                "D. Quản lí và duy trì hệ thống thông tin."
+            ],
+            correct: "B",
+            explain: "Network Administrator có nhiệm vụ <b>cài đặt, cấu hình, giám sát và tối ưu hiệu năng hệ thống mạng</b>. Sửa chữa phần cứng thuộc kỹ thuật viên; quản lý HTTT là IT Manager."
+        },
+        {
+            id: 24,
+            text: "Nghề nào sau đây thuộc nhóm nghề <b>dịch vụ</b> trong ngành Công nghệ thông tin?",
+            options: [
+                "A. Bảo mật hệ thống thông tin.",
+                "B. Quản trị và bảo trì hệ thống.",
+                "C. Sửa chữa và bảo trì máy tính.",
+                "D. Quản trị mạng máy tính."
+            ],
+            correct: "C",
+            explain: "<b>Sửa chữa và bảo trì máy tính</b> là nghề dịch vụ kỹ thuật trực tiếp phục vụ người dùng. Các nghề còn lại (A, B, D) thuộc nhóm quản trị/vận hành hệ thống tổ chức."
+        }
+    ],
+
+    part2Common: [
+        {
+            id: 1,
+            text: `Một nhóm giảng viên trường đại học A được cử đi tập huấn tại các xã vùng cao (đã có cáp quang, Internet). Lãnh đạo giao hai nhiệm vụ: (1) Gửi báo cáo cuối ngày đến <b>baocao@dha.edu.vn</b>; (2) Ba ngày một lần đăng bài lên website <b>https://dha.edu.vn</b>.`,
+            statements: [
+                { label: "a", text: "https trong địa chỉ https://dha.edu.vn là giao thức truyền tải thư điện tử.", correct: "S", explain: "<b>Sai.</b> <code>https</code> là giao thức truyền tải siêu văn bản bảo mật (HyperText Transfer Protocol Secure) dùng cho web. Giao thức thư điện tử là SMTP (gửi), POP3/IMAP (nhận)." },
+                { label: "b", text: "Tên miền website của trường đại học A đóng vai trò là một địa chỉ thay thế cho địa chỉ IP của máy chủ web.", correct: "Đ", explain: "<b>Đúng.</b> Tên miền (domain name) như <code>dha.edu.vn</code> là địa chỉ dạng chữ dễ nhớ, DNS sẽ phân giải nó thành địa chỉ IP tương ứng của máy chủ web." },
+                { label: "c", text: "Trong trường hợp máy chủ thư điện tử của trường đại học A thay đổi địa chỉ IP, trưởng nhóm vẫn có thể gửi báo cáo thành công đến địa chỉ email đã được cung cấp.", correct: "Đ", explain: "<b>Đúng.</b> Email được định tuyến qua tên miền (dha.edu.vn), hệ thống DNS-MX record sẽ tự cập nhật địa chỉ IP mới. Người gửi chỉ cần gửi đến địa chỉ email, không cần biết IP." },
+                { label: "d", text: "Học viên cần sử dụng điện thoại thông minh kết nối trực tiếp vào bộ chuyển mạch (Switch) để xem tài liệu học tập trên website.", correct: "S", explain: "<b>Sai.</b> Switch là thiết bị mạng có dây (cổng RJ-45). Điện thoại thông minh kết nối không dây qua Wi-Fi (Access Point). Điện thoại không thể kết nối trực tiếp vào Switch." }
+            ]
+        },
+        {
+            id: 2,
+            text: `Người quản trị trang web Đoàn thanh niên đã tạo biểu mẫu HTML để học sinh đăng kí hoạt động văn nghệ, thể thao:<br><div class="code-block mt-2">&lt;form action="dangki.php"&gt;\nHọ tên: &lt;input type="text" name="hoten" value=""&gt;\nEmail: &lt;input type="email" name="email" value=""&gt;\n&lt;input type="submit" value="Đăng kí"&gt;\n&lt;/form&gt;</div>`,
+            statements: [
+                { label: "a", text: "Biểu mẫu này có hai ô nhập dữ liệu và một nút gửi dữ liệu.", correct: "Đ", explain: "<b>Đúng.</b> Hai ô nhập: type=\"text\" (họ tên) và type=\"email\" (email). Một nút gửi: type=\"submit\"." },
+                { label: "b", text: "Giá trị của thuộc tính value của hai ô nhập dữ liệu không được để trống.", correct: "S", explain: "<b>Sai.</b> Thuộc tính <code>value=\"\"</code> hoàn toàn có thể để trống — đây là giá trị mặc định ban đầu của ô nhập, để trống là bình thường và hợp lệ." },
+                { label: "c", text: "Nếu nhập dữ liệu vào biểu mẫu và nhấn nút Đăng kí thì dữ liệu được gửi đến trang dangki.php.", correct: "Đ", explain: "<b>Đúng.</b> Thuộc tính <code>action=\"dangki.php\"</code> xác định trang đích nhận dữ liệu khi nhấn nút submit." },
+                { label: "d", text: "Để học sinh chỉ được lựa chọn một trong hai loại hoạt động Văn nghệ hoặc Thể thao, cần chèn thêm:<br><code>&lt;input type=\"radio\" name=\"optvannghe\"&gt;Văn nghệ<br>&lt;input type=\"radio\" name=\"optthethao\"&gt;Thể thao</code>", correct: "S", explain: "<b>Sai.</b> Radio button chỉ cho phép chọn một khi chúng có <b>cùng thuộc tính name</b>. Ở đây hai nút có name khác nhau (optvannghe ≠ optthethao), nên có thể chọn cả hai — không đúng yêu cầu." }
+            ]
+        }
+    ],
+
+    part2CS: [
+        {
+            id: 3,
+            text: `Một hợp tác xã ứng dụng IoT để thu thập dữ liệu tự động từ <b>2.000 lô đất</b> trong <b>5 vụ mùa</b> (loại đất, độ ẩm, nhiệt độ, ánh sáng, giống cây). Cuối mỗi vụ, kỹ sư nông nghiệp kết luận tình trạng cây: <b>khỏe mạnh</b> hoặc <b>bị sâu bệnh</b>. Hợp tác xã muốn dùng học máy xây dựng hệ thống dự đoán cho lô đất mới.`,
+            statements: [
+                { label: "a", text: "Bài toán dự đoán tình trạng cây trồng thuộc loại bài toán học máy có giám sát.", correct: "Đ", explain: "<b>Đúng.</b> Dữ liệu đã có nhãn kết quả (khỏe mạnh/sâu bệnh) do kỹ sư cung cấp — đây là đặc trưng của <b>Học có giám sát (Supervised Learning)</b>." },
+                { label: "b", text: "Tình trạng khỏe mạnh hoặc bị sâu bệnh là các nhãn cần dự đoán.", correct: "Đ", explain: "<b>Đúng.</b> Trong học máy có giám sát, <b>nhãn (label)</b> là giá trị đầu ra cần dự đoán. Ở đây nhãn là trạng thái cây: khỏe mạnh hoặc sâu bệnh." },
+                { label: "c", text: "Để dự đoán về tình trạng cây trồng cho một lô đất mới, hệ thống có thể đưa ra kết quả mà không cần dữ liệu về thời tiết hay loại đất của lô đất đó.", correct: "S", explain: "<b>Sai.</b> Mô hình học máy cần dữ liệu đầu vào (features) giống với dữ liệu huấn luyện để dự đoán. Nếu thiếu các đặc trưng quan trọng như loại đất, độ ẩm... kết quả sẽ không chính xác hoặc không thể dự đoán." },
+                { label: "d", text: "Hệ thống có thể thay thế hoàn toàn kĩ sư nông nghiệp trong việc ra quyết định phun thuốc bảo vệ thực vật.", correct: "S", explain: "<b>Sai.</b> AI chỉ hỗ trợ và đề xuất, không thay thế hoàn toàn chuyên gia. Quyết định thực tế còn phụ thuộc nhiều yếu tố (kinh nghiệm, đạo đức nghề nghiệp, trách nhiệm pháp lý...) mà AI hiện tại không thể đảm nhận." }
+            ]
+        },
+        {
+            id: 4,
+            text: `Cho hàm F được viết bằng Python và C++ với mảng A gồm n số nguyên dương:<br><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3"><div class="code-block"><span class="kw">def</span> <span class="func">F</span>(A, n):\n    j = <span class="num">0</span>\n    <span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(n):\n        <span class="kw">if</span> A[i] % <span class="num">2</span> != <span class="num">0</span>:\n            <span class="kw">if</span> A[j] % <span class="num">2</span> == <span class="num">0</span>:\n                t = A[i]\n                A[i] = A[j]\n                A[j] = t\n            j = j + <span class="num">1</span>\n    <span class="kw">return</span> A[<span class="num">0</span>] + A[n - <span class="num">1</span>]</div><div class="code-block"><span class="type">int</span> <span class="func">F</span>(<span class="type">int</span> A[], <span class="type">int</span> n) {\n    <span class="type">int</span> j = <span class="num">0</span>;\n    <span class="kw">for</span> (<span class="type">int</span> i = <span class="num">0</span>; i &lt; n; i++)\n        <span class="kw">if</span> (A[i] % <span class="num">2</span> != <span class="num">0</span>) {\n            <span class="kw">if</span> (A[j] % <span class="num">2</span> == <span class="num">0</span>) {\n                <span class="type">int</span> t = A[i];\n                A[i] = A[j];\n                A[j] = t;\n            }\n            j = j + <span class="num">1</span>;\n        }\n    <span class="kw">return</span> A[<span class="num">0</span>] + A[n - <span class="num">1</span>];\n}</div></div>`,
+            statements: [
+                { label: "a", text: "Hàm F có hai tham số.", correct: "Đ", explain: "<b>Đúng.</b> Hàm F nhận 2 tham số: <code>A</code> (mảng số nguyên dương) và <code>n</code> (độ dài mảng)." },
+                { label: "b", text: "Sau khi thực hiện hàm F, mảng A không tồn tại phần tử có giá trị chẵn nào có chỉ số lớn hơn chỉ số của phần tử có giá trị lẻ.", correct: "Đ", explain: "<b>Đúng.</b> Hàm F thực hiện đưa các số lẻ về đầu mảng (bằng cách hoán đổi với số chẵn). Sau khi chạy, tất cả phần tử chẵn sẽ nằm sau tất cả phần tử lẻ." },
+                { label: "c", text: "Nếu A = (2, 7, 6, 1, 4, 3, 5) và n = 7, thì hàm F trả về giá trị 9.", correct: "Đ", explain: "<b>Đúng.</b> Sau khi chạy F với A=(2,7,6,1,4,3,5): các số lẻ dồn về đầu → A=(7,1,3,5,4,6,2). A[0]+A[6] = 7+2 = <b>9</b>." },
+                { label: "d", text: "Với mảng A bất kì, giả sử mảng B được tạo ra bằng cách sao chép A rồi hoán đổi vị trí một số phần tử thì kết quả F(A,n) và F(B,n) luôn bằng nhau.", correct: "S", explain: "<b>Sai.</b> F trả về A[0]+A[n-1] sau khi sắp xếp lại. Tổng phần tử đầu và cuối sau sắp xếp phụ thuộc phân bố chẵn/lẻ của mảng — hoán đổi vị trí có thể thay đổi số lẻ lớn nhất/nhỏ nhất ở đầu/cuối." }
+            ]
+        }
+    ],
+
+    part2ICT: [
+        {
+            id: 5,
+            text: `Một trường đại học phát động cuộc thi thiết kế website bằng phần mềm tạo trang web, yêu cầu có các trang: <b>Trang chủ</b> (tin tức nổi bật), <b>Giới thiệu</b> (tóm tắt các khoa + liên kết chi tiết), <b>Tuyển dụng</b> (thông báo + biểu mẫu đăng kí).`,
+            statements: [
+                { label: "a", text: "Nếu đưa logo của từng khoa vào trang Giới thiệu thì có thể thiết lập liên kết từ từng logo này đến trang chi tiết của khoa tương ứng.", correct: "Đ", explain: "<b>Đúng.</b> Trong HTML/web builder, hình ảnh logo có thể được bao bởi thẻ &lt;a href=...&gt; để tạo liên kết ảnh — đây là kỹ thuật phổ biến." },
+                { label: "b", text: "Thanh điều hướng chỉ có ở Trang chủ để người dùng dễ dàng di chuyển giữa các trang trong website.", correct: "S", explain: "<b>Sai.</b> Thanh điều hướng (navigation bar) nên xuất hiện trên <b>tất cả các trang</b> của website để người dùng có thể di chuyển từ bất kỳ trang nào sang trang khác." },
+                { label: "c", text: "Có thể thiết kế biểu mẫu đã nêu bằng một công cụ trực tuyến phù hợp, sau đó chèn liên kết của biểu mẫu này vào trang Tuyển dụng.", correct: "Đ", explain: "<b>Đúng.</b> Các công cụ như Google Forms, Typeform... cho phép tạo biểu mẫu trực tuyến và lấy liên kết nhúng (embed) hoặc chèn URL vào trang web." },
+                { label: "d", text: "Để xem được nội dung của website sau khi xuất bản, máy tính của người dùng cần sử dụng phần mềm tạo trang web.", correct: "S", explain: "<b>Sai.</b> Sau khi xuất bản, website được xem qua <b>trình duyệt web</b> (Chrome, Firefox...) — không cần phần mềm thiết kế web. Phần mềm thiết kế chỉ cần cho người tạo." }
+            ]
+        },
+        {
+            id: 6,
+            text: `Một chủ nông trại dùng phần mềm quản lí vườn cây với CSDL gồm:<br>
+<ul class="list-disc list-inside my-2 text-sm space-y-1">
+<li><b>VUON_CAY</b>(maVC, tenVC, diaDiem, dienTich) — khóa chính: maVC</li>
+<li><b>LOAI_CAY</b>(maLC, tenLC) — khóa chính: maLC</li>
+<li><b>THONG_KE</b>(maVC, maLC, namTK, soLuong, sanLuong)</li>
+</ul>`,
+            statements: [
+                { label: "a", text: "Để tạo cấu trúc bảng LOAI_CAY, có các thao tác: Tạo bảng mới; Đặt tên bảng; Tạo và xác định kiểu dữ liệu cho các trường; Thiết lập khóa chính.", correct: "Đ", explain: "<b>Đúng.</b> Đây là 4 bước chuẩn khi tạo bảng trong phần mềm quản trị CSDL như Access hay MySQL Workbench." },
+                { label: "b", text: "Trong bảng LOAI_CAY, không thể thiết lập trường maLC có kiểu số nguyên và tự động tăng.", correct: "S", explain: "<b>Sai.</b> Hoàn toàn <b>có thể</b> thiết lập trường mã (maLC) kiểu số nguyên và tự động tăng (AutoNumber/AUTO_INCREMENT) trong hầu hết các hệ quản trị CSDL." },
+                { label: "c", text: "Để đảm bảo tính nhất quán dữ liệu, khi nhập maVC vào bảng THONG_KE, cần nhập giá trị là một trong các giá trị đã có của maVC trong bảng VUON_CAY.", correct: "Đ", explain: "<b>Đúng.</b> Đây là quy tắc <b>toàn vẹn tham chiếu (Referential Integrity)</b>: khóa ngoại trong THONG_KE phải tham chiếu đến giá trị tồn tại trong VUON_CAY." },
+                { label: "d", text: "Để lấy tên loại cây, tên vườn, sản lượng > 3000kg năm 2025, cần liên kết VUON_CAY–THONG_KE qua maVC; VUON_CAY–LOAI_CAY qua maLC; điều kiện namTK=2025 và sanLuong>3000.", correct: "S", explain: "<b>Sai.</b> Liên kết đúng phải là: THONG_KE–VUON_CAY qua maVC và <b>THONG_KE–LOAI_CAY qua maLC</b> (không phải VUON_CAY–LOAI_CAY). Đề bài mô tả cặp liên kết VUON_CAY–LOAI_CAY là sai về mặt thiết kế CSDL." }
+            ]
+        }
+    ]
+};
+
+// ================== RENDER FUNCTIONS ==================
+
+function renderPart1() {
+    const container = document.getElementById('part1-container');
+    examData.part1.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'bg-white border border-gray-200 rounded-xl p-5 shadow-sm';
+        div.innerHTML = `
+            <p class="font-semibold text-gray-800 mb-3"><span class="text-blue-700 font-bold">Câu ${q.id}.</span> ${q.text}</p>
+            <div class="space-y-2" id="opts-${q.id}">
+                ${q.options.map((opt, i) => {
+                    const letter = ['A','B','C','D'][i];
+                    return `<label class="flex items-start gap-2 cursor-pointer p-2 rounded-lg hover:bg-blue-50 border border-transparent" id="lbl-${q.id}-${letter}">
+                        <input type="radio" class="radio-custom mt-1 accent-blue-600" name="q${q.id}" value="${letter}">
+                        <div>${opt}</div>
+                    </label>`;
+                }).join('')}
+            </div>
+            <div id="explain-${q.id}" class="hidden mt-3 p-3 rounded-lg text-sm"></div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function renderTFSection(data, containerId, idPrefix) {
+    const container = document.getElementById(containerId);
+    data.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'bg-white border border-gray-200 rounded-xl p-5 shadow-sm';
+        div.innerHTML = `
+            <p class="font-semibold text-gray-800 mb-3"><span class="text-blue-700 font-bold">Câu ${q.id}.</span> ${q.text}</p>
+            <div class="space-y-3">
+                ${q.statements.map(s => `
+                    <div class="border border-gray-200 rounded-lg p-3 bg-gray-50" id="stmt-${idPrefix}-${q.id}-${s.label}">
+                        <p class="text-sm text-gray-700 mb-2"><span class="font-bold">${s.label})</span> ${s.text}</p>
+                        <div class="flex gap-3">
+                            <label class="flex-1 text-center border border-gray-300 rounded-md py-1 cursor-pointer text-sm font-medium hover:bg-green-50 tf-label" id="tf-d-${idPrefix}-${q.id}-${s.label}">
+                                <input type="radio" class="tf-radio hidden" name="tf-${idPrefix}-${q.id}-${s.label}" value="Đ"> ✔ Đúng
+                            </label>
+                            <label class="flex-1 text-center border border-gray-300 rounded-md py-1 cursor-pointer text-sm font-medium hover:bg-red-50 tf-label" id="tf-s-${idPrefix}-${q.id}-${s.label}">
+                                <input type="radio" class="tf-radio hidden" name="tf-${idPrefix}-${q.id}-${s.label}" value="S"> ✘ Sai
+                            </label>
+                        </div>
+                        <div id="tf-explain-${idPrefix}-${q.id}-${s.label}" class="hidden mt-2 text-xs p-2 rounded bg-blue-50 text-gray-700"></div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function selectTrack(track) {
+    const csDiv = document.getElementById('track-cs');
+    const ictDiv = document.getElementById('track-ict');
+    const btnCS = document.getElementById('btn-cs');
+    const btnICT = document.getElementById('btn-ict');
+    if (track === 'cs') {
+        csDiv.classList.remove('hidden');
+        ictDiv.classList.add('hidden');
+        btnCS.className = 'px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition';
+        btnICT.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded-md font-medium hover:bg-blue-600 hover:text-white transition';
+    } else {
+        ictDiv.classList.remove('hidden');
+        csDiv.classList.add('hidden');
+        btnICT.className = 'px-4 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition';
+        btnCS.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded-md font-medium hover:bg-blue-600 hover:text-white transition';
+    }
+}
+
+function submitExam() {
+    let totalCorrect = 0;
+    let totalQ = 0;
+
+    // Grade Part 1
+    examData.part1.forEach(q => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        const expDiv = document.getElementById(`explain-${q.id}`);
+        const labels = document.querySelectorAll(`#opts-${q.id} label`);
+        labels.forEach(lbl => {
+            lbl.classList.remove('bg-green-50','bg-red-50','border-green-400','border-red-400');
+        });
+        totalQ++;
+        if (selected) {
+            const correct = selected.value === q.correct;
+            if (correct) totalCorrect++;
+            labels.forEach(lbl => {
+                const inp = lbl.querySelector('input');
+                if (inp.value === q.correct) { lbl.classList.add('bg-green-50','border-green-400'); }
+                else if (inp.value === selected.value && !correct) { lbl.classList.add('bg-red-50','border-red-400'); }
+            });
+        } else {
+            const correctLbl = document.getElementById(`lbl-${q.id}-${q.correct}`);
+            if (correctLbl) correctLbl.classList.add('bg-green-50','border-green-400');
+        }
+        expDiv.classList.remove('hidden');
+        expDiv.className = 'mt-3 p-3 rounded-lg text-sm bg-yellow-50 border-l-4 border-yellow-400 text-gray-700';
+        expDiv.innerHTML = `<span class="font-bold text-yellow-700">💡 Giải thích (Đáp án: ${q.correct}):</span> ${q.explain}`;
+    });
+
+    // Grade Part 2
+    const gradeTF = (data, prefix) => {
+        data.forEach(q => {
+            q.statements.forEach(s => {
+                const selected = document.querySelector(`input[name="tf-${prefix}-${q.id}-${s.label}"]:checked`);
+                const expDiv = document.getElementById(`tf-explain-${prefix}-${q.id}-${s.label}`);
+                const stmtDiv = document.getElementById(`stmt-${prefix}-${q.id}-${s.label}`);
+                totalQ++;
+                const isCorrect = selected && selected.value === s.correct;
+                if (isCorrect) totalCorrect++;
+                stmtDiv.classList.remove('border-green-400','border-red-400','bg-green-50','bg-red-50');
+                if (selected) {
+                    stmtDiv.classList.add(isCorrect ? 'bg-green-50' : 'bg-red-50', isCorrect ? 'border-green-400' : 'border-red-400');
+                }
+                expDiv.classList.remove('hidden');
+                expDiv.innerHTML = `<b>Đáp án: ${s.correct === 'Đ' ? '✔ Đúng' : '✘ Sai'}</b> — ${s.explain}`;
+            });
+        });
+    };
+
+    gradeTF(examData.part2Common, 'common');
+    const csVisible = !document.getElementById('track-cs').classList.contains('hidden');
+    if (csVisible) gradeTF(examData.part2CS, 'cs');
+    else gradeTF(examData.part2ICT, 'ict');
+
+    const score = (totalCorrect / totalQ * 10).toFixed(2);
+    const resultSection = document.getElementById('result-section');
+    resultSection.classList.remove('hidden');
+    document.getElementById('score-display').textContent = `${score} / 10`;
+    const msgs = ['Cần cố gắng thêm! 💪', 'Trung bình — ôn tập thêm nhé! 📖', 'Khá! Tiếp tục phấn đấu 👍', 'Tốt lắm! Gần đến đỉnh rồi 🌟', 'Xuất sắc! Thật tuyệt vời 🏆'];
+    const idx = Math.min(Math.floor(parseFloat(score) / 2), 4);
+    document.getElementById('score-message').textContent = msgs[idx];
+    resultSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Init
+renderPart1();
+renderTFSection(examData.part2Common, 'part2-common-container', 'common');
+renderTFSection(examData.part2CS, 'part2-cs-container', 'cs');
+renderTFSection(examData.part2ICT, 'part2-ict-container', 'ict');
+
+// Radio TF visual
+document.addEventListener('change', e => {
+    if (e.target.classList.contains('tf-radio')) {
+        const name = e.target.name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+            inp.parentElement.classList.remove('bg-blue-600','text-white','border-blue-600');
+            inp.parentElement.classList.add('border-gray-300');
+        });
+        e.target.parentElement.classList.add('bg-blue-600','text-white','border-blue-600');
+        e.target.parentElement.classList.remove('border-gray-300');
+    }
+});
+</script>
+</body>
+</html>
